@@ -1,0 +1,52 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>나의 클라우드</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    >
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar-brand {
+            font-weight: bold;
+        }
+        .file-card img {
+            object-fit: cover;
+            height: 180px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-dark bg-dark px-3">
+    <a class="navbar-brand text-white" href="{% url 'html_files:file_list_page' %}">
+        ☁ 나의 클라우드
+    </a>
+
+    <a class="navbar-brand text-white" href="{% url 'html_files:file_upload_page' %}">
+        업로드
+    </a>
+
+
+</nav>
+
+<div class="container my-4">
+    {% block content %}
+    {% endblock %}
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>
