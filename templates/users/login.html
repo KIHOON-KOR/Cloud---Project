@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5" style="max-width: 400px;">
+    <h2 class="mb-4 text-center">로그인</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label class="form-label">아이디</label>
+            <input type="text" name="username" class="form-control" required autofocus>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">비밀번호</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
+
+        <button class="btn btn-dark w-100" type="submit">로그인</button>
+    </form>
+
+    <div class="text-center mt-3">
+        <a href="{% url 'users:register' %}">회원가입</a>
+    </div>
+</div>
+
+{% endblock %}
