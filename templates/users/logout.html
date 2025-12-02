@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5" style="max-width: 400px;">
+    <h2 class="mb-4">로그아웃</h2>
+
+    <button id="logoutBtn" class="btn btn-danger w-100">로그아웃 하기</button>
+
+    <div id="message" class="mt-3 text-center"></div>
+</div>
+
+<script>
+document.getElementById("logoutBtn").addEventListener("click", async function() {
+
+    const refresh = localStorage.getItem("refresh");
+
+    const response = await fetch("{% url 'users:logout' %}", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("access")
+        },
+        body: JSON.stringify({ refresh: refresh })
+    });
+
+    const data = await response.json();
+    const msg = document.getElementById("message");
+
+    // 토큰 제거
+    localStorage.removeItem("access");
+    localStorage.removeItem("refresh");
+
+    if (response.ok) {
+        msg.innerHTML = `<div class="alert alert-success">로그아웃 성공!</div>`;
+        setTimeout(()=> window.location.href="/", 1200);
+    } else {
+        msg.innerHTML = `<div class="alert alert-danger">이미 로그아웃된 토큰 또는 오류</div>`;
+    }
+});
+</script>
+
+{% endblock %}
